@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+int ans(int s,int* w,int str,int end)
+{
+    if(str>end)
+    return 0;
+    int i,sum=s;
+    for(i=str;i<=end;i++)
+    {
+        if(sum<w[i])
+        {
+            break;
+        }
+        else
+        {
+            sum-=w[i];
+        }
+    }
+    int a1=ans(s,w,i,end)+1;
+    sum=s;
+    for(i=end;i>=str;i--)
+    {
+        if(sum<w[i])
+        {
+            break;
+        }
+        else
+        {
+            sum-=w[i];
+        }
+    }
+    int a2=ans(s,w,str,i)+1;
+    if(a1>a2)
+        return a1;
+    else 
+        return a2;
+}
+int main() {
+	// your code goes here
+	int s,n,i;
+	int* w=new int[3];
+	cin>>n;
+	while(n>0)
+	{
+	    cin>>s;
+	    for(i=0;i<3;i++)
+	        cin>>w[i];
+	    cout<<ans(s,w,0,2)<<endl;
+	    
+	    
+	    
+	    
+	    n--;
+	}
+	return 0;
+}
